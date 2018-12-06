@@ -1,0 +1,96 @@
+<!doctype html>
+<html>
+    <head>
+      <link rel="icon" href="images/weeb.png">
+      <!--Import Google Icon Font-->
+
+      <!-- Compiled and minified CSS -->
+
+
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <link rel="stylesheet" type="text/css" href="styles.css"></link>
+    <title>navigator</title>
+  </head>
+  <body>
+    <div><h1>WELCOME STRANGER</h1></div>
+
+<!-- remove me !!!
+<div id='city-box'>
+      <div class="row">
+        <div class="col s12">
+          <div class="row">
+            <div class="input-field col s12">
+              <i class="material-icons prefix">textsms</i>
+              <input type="text" id="autocomplete-input" class="autocomplete">
+              <button id="city-submit" class="btn waves-effect waves-light" type="submit" name="action">City
+                <i class="material-icons right">send</i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    -->
+
+  <div class="ui-widget">
+  <label for="tags">Tags: </label>
+  <input id="tags">
+</div>
+
+
+
+<!-- remove me!!!
+      <div id='days-box'>
+            <div class="row">
+              <div class="col s12">
+                <div class="row">
+                  <div class="input-field col s12">
+                    <i class="material-icons prefix">textsms</i>
+                    <input type="text" id="day-input">
+                    <button id="day-submit" class="btn waves-effect waves-light" type="submit" name="action">Days
+                      <i class="material-icons right">send</i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          -->
+
+            <div id="select-container">
+              <select name="select-box" id="day-select" class="select">
+                <option value="3">3 days:</option>
+                <option value="5">5 days</option>
+                <option selected="selected" value="7">1 week</option>
+                <option value="14">2 weeks</option>
+              </select>
+            </div>
+
+    <div id="map">
+      <div class="spinner">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+      </div>
+    </div>
+
+      <div id='lat'></div>
+
+      <div id='long'></div>
+
+      <div id='city-name'></div>
+
+      <div id='fail-message'><div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!-- Compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTU-JVepSRb5yJKYEmrhVwWRsLnN7ugMI&libraries=places"></script>
+    <script src="location-list.js"></script>
+    <script src="g-map-dom.js"></script>
+  </body>
+</html>

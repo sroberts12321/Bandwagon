@@ -6,7 +6,7 @@ geolocationAPI_KEY = 'AIzaSyDTU-JVepSRb5yJKYEmrhVwWRsLnN7ugMI'
 placesAPI_KEY = 'AIzaSyDTU-JVepSRb5yJKYEmrhVwWRsLnN7ugMI'
 
 //generates the a time stamp for the current day to pass to TM.js
-function startTimeStamp(){
+function startTimeStamp() {
   let timeZoneOffset = (new Date()).getTimezoneOffset() * 60000
   let startTime = (new Date(Date.now() - timeZoneOffset)).toISOString();
   startTime = startTime.substring(0, startTime.indexOf('T'))
@@ -15,9 +15,9 @@ function startTimeStamp(){
 }
 
 //generates the a time stamp for the current day + the $day-select to pass to TM.js
-function endTimeStamp(){
+function endTimeStamp() {
   let daysOffset = ($("#day-select").find(":selected").val()) * 60 * 60 * 24 * 1000
-  let timeZoneOffset= (new Date()).getTimezoneOffset() * 60000
+  let timeZoneOffset = (new Date()).getTimezoneOffset() * 60000
   let endTime = new Date(Date.now() + daysOffset - timeZoneOffset)
   endTime = endTime.toISOString()
   endTime = endTime.substring(0, endTime.indexOf('T'))
@@ -25,7 +25,7 @@ function endTimeStamp(){
   return endTime
 }
 
-$("#day-select").change(function(){
+$("#day-select").change(function () {
   endTimeStamp()
 })
 
@@ -44,18 +44,18 @@ function success(position) {
   //!!! $('#lat').html(mylat)
   //!!!  $('#long').html(mylong)
 
-//warning not robust!!!
-  fetch('https://maps.googleapis.com/maps/api/geocode/json?latlng='+mylat+','+mylong+'&result_type=locality'+mapsAPI_KEY).then(function(response){
+  //warning not robust!!!
+  fetch('https://maps.googleapis.com/maps/api/geocode/json?latlng=' + mylat + ',' + mylong + '&result_type=locality' + mapsAPI_KEY).then(function (response) {
     return response.json()
-  }).then(function(json){
+  }).then(function (json) {
     return json["results"]
-  }).then(function(results){
+  }).then(function (results) {
     return results[0]
-  }).then(function(results_array){
+  }).then(function (results_array) {
     return results_array["address_components"]
-  }).then(function(address_components_array){
+  }).then(function (address_components_array) {
     return address_components_array[0]
-  }).then(function(address_component){
+  }).then(function (address_component) {
     $("#city-select").val(address_component['long_name'])
     $("#city-select").trigger('change')
     //DO STUFF HERE!!!
@@ -68,19 +68,19 @@ function failure() {
 }
 
 //grabs the city value from textbox, returns USA if not in the list passes to TM.js
-function getCity(){
+function getCity() {
   let cityName = $('#city-select').val()
-  if (locationData[cityName] == undefined){
+  if (locationData[cityName] == undefined) {
     cityName = 'USA'
   }
   console.log(cityName)
   return cityName
 }
 
-$(document).ready(()=>{
-$('#city-select').select2({
-  placeholder: 'Select a city',
-  width: '100%',
-  data: cities
-})
+$(document).ready(() => {
+  $('#city-select').select2({
+    placeholder: 'Select a city',
+    width: '100%',
+    data: cities
+  })
 })

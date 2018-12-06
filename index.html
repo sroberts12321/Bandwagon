@@ -1,95 +1,97 @@
 <!doctype html>
 <html lang="en">
+
 <head>
-  <link rel="stylesheet" type="text/css" href="styles.css">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
-  <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/wenzhixin/multiple-select/e14b36de/multiple-select.css">
-  <link rel="icon" type="image/x-icon" href="images/favicon.ico">
-  <title>BandWagon</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/wenzhixin/multiple-select/e14b36de/multiple-select.css">
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <title>BandWagon</title>
 </head>
+
 <body>
 
-<img src="images/title.png" class="title">
+    <img src="images/title.png" class="title">
 
-<div class="top-selection-container">
-    <div class="heading-container">
-        <div class="city-text">Events in the city of:</div>
+    <div class="top-selection-container">
+        <div class="heading-container">
+            <div class="city-text">Events in the city of:</div>
 
 
-        <select id="city-select"></select>
-        <p id='maps-message'></p>
+            <select id="city-select"></select>
+            <p id='maps-message'></p>
+        </div>
+
+        <div class="heading-container">
+            <div class="genre-text">Events in the next</div>
+
+            <div id="select-container">
+                <select name="select-box" id="day-select" class="select">
+                    <option value="3">3 days</option>
+                    <option value="5">5 days</option>
+                    <option selected="selected" value="7">week</option>
+                    <option value="14">2 weeks</option>
+                    <option value="30">month</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="heading-container">
+            <div class="genre-text">Genre</div>
+
+            <div class="genre-selector">
+                <select class="w300" multiple="multiple" id="genreSelect">
+                    <option value="KnvZfZ7vAvv">Alternative</option>
+                    <option value="KnvZfZ7vAve">Ballads</option>
+                    <option value="KnvZfZ7vAvd">Blues</option>
+                    <option value="KnvZfZ7vAeJ">Classical</option>
+                    <option value="KnvZfZ7vAv6">Country</option>
+                    <option value="KnvZfZ7vAvF">Dance</option>
+                    <option value="KnvZfZ7vAva">Folk</option>
+                    <option value="KnvZfZ7vAvJ">Holiday</option>
+                    <option value="KnvZfZ7vAvE">Jazz</option>
+                    <option value="KnvZfZ7vAvI">Medieval</option>
+                    <option value="KnvZfZ7vAvt">Metal</option>
+                    <option value="KnvZfZ7vAvn">NewAge</option>
+                    <option value="KnvZfZ7vAvl">Other</option>
+                    <option value="KnvZfZ7vAev">Pop</option>
+                    <option value="KnvZfZ7vAv1">Hip-Hop / Rap</option>
+                    <option value="KnvZfZ7vAee">R&B</option>
+                    <option value="KnvZfZ7vAed">Reggae</option>
+                    <option value="KnvZfZ7vAe7">Religious</option>
+                    <option value="KnvZfZ7vAeA">Rock</option>
+                    <option value="KnvZfZ7vAe6">Undefined</option>
+                    <option value="KnvZfZ7vAeF">World</option>
+                </select>
+            </div>
+        </div>
     </div>
 
-    <div class="heading-container">
-        <div class="genre-text">Events in the next</div>
 
-    <div id="select-container">
-        <select name="select-box" id="day-select" class="select">
-        <option value="3">3 days</option>
-        <option value="5">5 days</option>
-        <option selected="selected" value="7">week</option>
-        <option value="14">2 weeks</option>
-        <option value="30">month</option>
-        </select>
+    <div id="listBody" class="listBody">
+
+
+        <div class="filter-btn-container">
+            <a class="btn" id="generate">Find Events</a>
+        </div>
+
+        <div class="btn-row-container">
+            <a class="btn spotify-btn" id="generate2">Log Into Spotify</a>
+            <a class="btn playlist-btn" id="generate3">Generate Spotify Playlist</a>
+        </div>
+
+
+        <div id="playlist" class="playlist">
+
+
+        </div>
+        <h3>Upcoming Concerts</h3>
+
+        <ul id="movieList" class="movieList">
+            <div class="genre">
+        </ul>
+
     </div>
-    </div>
-
-    <div class="heading-container">
-        <div class="genre-text">Genre</div>
-
-    <div class="genre-selector">
-    <select class="w300" multiple="multiple" id="genreSelect">
-        <option value="KnvZfZ7vAvv">Alternative</option>
-        <option value="KnvZfZ7vAve">Ballads</option>
-        <option value="KnvZfZ7vAvd">Blues</option>
-        <option value="KnvZfZ7vAeJ">Classical</option>
-        <option value="KnvZfZ7vAv6">Country</option>
-        <option value="KnvZfZ7vAvF">Dance</option>
-        <option value="KnvZfZ7vAva">Folk</option>
-        <option value="KnvZfZ7vAvJ">Holiday</option>
-        <option value="KnvZfZ7vAvE">Jazz</option>
-        <option value="KnvZfZ7vAvI">Medieval</option>
-        <option value="KnvZfZ7vAvt">Metal</option>
-        <option value="KnvZfZ7vAvn">NewAge</option>
-        <option value="KnvZfZ7vAvl">Other</option>
-        <option value="KnvZfZ7vAev">Pop</option>
-        <option value="KnvZfZ7vAv1">Hip-Hop / Rap</option>
-        <option value="KnvZfZ7vAee">R&B</option>
-        <option value="KnvZfZ7vAed">Reggae</option>
-        <option value="KnvZfZ7vAe7">Religious</option>
-        <option value="KnvZfZ7vAeA">Rock</option>
-        <option value="KnvZfZ7vAe6">Undefined</option>
-        <option value="KnvZfZ7vAeF">World</option>
-    </select>
-    </div>
-    </div>
-    </div>
-
-
-<div id="listBody" class="listBody">
-
-
-<div class="filter-btn-container">
-<a class="btn" id="generate">Find Events</a>
-</div>
-
-<div class="btn-row-container">
-    <a class="btn spotify-btn" id="generate2">Log Into Spotify</a>
-    <a class="btn playlist-btn" id="generate3">Generate Spotify Playlist</a>
-</div>
-
-
-<div id="playlist" class="playlist">
-    
-
-</div>
-<h3>Upcoming Concerts</h3>
-
-<ul id="movieList" class="movieList">
-    <div class="genre">
-</ul>
-
-</div>
 
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -102,4 +104,5 @@
 <!-- Stephen's JS goes here -->
 <script src="TM.js"></script>
 <script src="spotify.js"></script>
+
 </html>
