@@ -1,0 +1,22 @@
+{
+  "name": "bandwagon",
+  "version": "1.0.0",
+  "description": "",
+  "main": "TM.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IwanderTx3/BandWagon.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/IwanderTx3/BandWagon/issues"
+  },
+  "homepage": "https://github.com/IwanderTx3/BandWagon#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}
