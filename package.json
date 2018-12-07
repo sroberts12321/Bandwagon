@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/IwanderTx3/BandWagon#readme",
   "dependencies": {
+    "dotenv": "^6.2.0",
     "express": "^4.16.4"
   }
 }
