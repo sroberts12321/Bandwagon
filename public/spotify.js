@@ -88,8 +88,6 @@ function findBandIds(searchTerms) {
 function findTopSongs(list_of_band_ids) {
   var song_ids = []
   length_of_requests = list_of_band_ids.length
-  band_top_track_api_results = []
-  list_of_song_titles = []
   list_of_band_ids.forEach((item) => {
     $.ajax({
       url: `https://api.spotify.com/v1/artists/${item}/top-tracks?country=US`,
@@ -99,11 +97,6 @@ function findTopSongs(list_of_band_ids) {
         'Authorization': 'Bearer ' + access_token
       },
     }).then((response) => {
-      var songName = response.tracks[0].name
-      var songId = response.tracks[0].id
-      band_top_track_api_results.push(songId)
-      list_of_song_titles.push(songName)
-      successful_requests += 1
       if (response.tracks[0] == undefined) {
         length_of_requests -= 1
       } else {
@@ -128,6 +121,7 @@ function findTopSongs(list_of_band_ids) {
 
 // Posts new playlist named "Bandwagon" to user's profile, calls functions to format and add songs to playlist
 function playlistGenerator(formatted_songs) {
+  // playlist.css(“display”, “flex”)
   var playlistName = { name: "Bandwagon" }
   $.ajax({
     method: 'POST',
@@ -147,13 +141,6 @@ function playlistGenerator(formatted_songs) {
       displayPlaylist()
     }
   })
-}
-
-
-// Dynamically injects the playlist after it has been generated
-function displayPlaylist() {
-  playlistDiv = document.getElementById("playlist")
-  playlistDiv.innerHTML = `<iframe id="playlist-frame" src="https://open.spotify.com/embed?uri=spotify:user:${currentUser}:playlist:${playlist_id}" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>`
 }
 
 // Takes playlist id and formatted track ids and adds the songs to created playlist on user's profile.
@@ -181,44 +168,29 @@ function formattedSongs() {
   return band_top_track_api_results
 }
 
-// Retrieves User Id and sets it to global variable, resets variable each time called
-function getUserId() {
-  currentUser = ''
-  $.ajax({
-    url: `https://api.spotify.com/v1/me`,
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + access_token
-    },
-    success: (response) => {
-      currentUser = response.id
-      console.log("User ID retrieved")
-    }
-  })
-  // Dynamically injects the playlist after it has been generated
-  function displayPlaylist() {
-    playlistDiv = document.getElementById("playlist")
-    playlistDiv.innerHTML = ''
-    playlistDiv.innerHTML = `<iframe id="playlist-frame" src="https://open.spotify.com/embed?uri=spotify:user:${currentUser}:playlist:${playlist_id}" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>`
-  }
+// Dynamically injects the playlist after it has been generated
+function displayPlaylist() {
+  playlistDiv = document.getElementById("playlist")
+  playlistDiv.innerHTML = ''
+  playlistDiv.innerHTML = `<iframe id="playlist-frame" src="https://open.spotify.com/embed?uri=spotify:user:${currentUser}:playlist:${playlist_id}" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>`
+}
 
-  // Sends user to authorization page
-  authorize.click(() => {
-    spotifyAuthorize()
-  })
+// Sends user to authorization page
+authorize.click(() => {
+  spotifyAuthorize()
+})
 
 
-  // Extracts token and User ID after authorization, then goes through basically every other function on the page.
-  playlist_generator.click(() => {
-    getToken()
-    getUserId()
-    $('#playlist').html(` <div class="spinner">
+// Extracts token and User ID after authorization, then goes through basically every other function on the page.
+playlist_generator.click(() => {
+  getToken()
+  getUserId()
+  $('#playlist').html(` <div class="spinner">
   <div class="rect1"></div>
   <div class="rect2"></div>
   <div class="rect3"></div>
   <div class="rect4"></div>
   <div class="rect5"></div>
  </div>`)
-    let id_list = findBandIds(artistPass)
-  })
+  let id_list = findBandIds(artistPass)
+})
