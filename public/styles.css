@@ -13,7 +13,11 @@ h1 {
 	text-align: center;
 }
 
+<<<<<<< HEAD:styles.css
 .playlist{
+=======
+#playlist{
+>>>>>>> server:public/styles.css
   display: flex;
   padding-top: 100px;
   justify-content: center;
@@ -180,6 +184,7 @@ h3 {
   display: flex;
   text-shadow: 1px 2px #020202;
 }
+
 
 .playlist-btn {
   margin-left: 20px;

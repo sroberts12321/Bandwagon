@@ -66,16 +66,14 @@ function findBandIds(searchTerms) {
     }).then((response) => {
       if ((response.artists.total !== 0) && ($.inArray(response.artists.items[0].id, band_id_api_results)) == -1) {
         band_id_api_results.push(response.artists.items[0].id)
+        successful_requests += 1
       } else {
         length_of_requests -= 1
       }
 
-      successful_requests += 1
-
 
       if (length_of_requests == successful_requests) {
         console.log("Finished getting Band IDs")
-        console.log(band_id_api_results)
         successful_requests = 0
         findTopSongs(band_id_api_results)
       } else {
@@ -106,10 +104,20 @@ function findTopSongs(list_of_band_ids) {
       band_top_track_api_results.push(songId)
       list_of_song_titles.push(songName)
       successful_requests += 1
+      if (response.tracks[0] == undefined) {
+        length_of_requests -= 1
+      } else {
+        var songName = response.tracks[0].name
+        var songId = response.tracks[0].id
+        band_top_track_api_results.push(songId)
+        list_of_song_titles.push(songName)
+        successful_requests += 1
+      }
 
       if (length_of_requests == successful_requests) {
         console.log("Finished getting top tracks")
         console.log(list_of_song_titles)
+        successful_requests = 0
         var songFormat = formattedSongs()
         playlistGenerator(songFormat)
       }
@@ -120,7 +128,6 @@ function findTopSongs(list_of_band_ids) {
 
 // Posts new playlist named "Bandwagon" to user's profile, calls functions to format and add songs to playlist
 function playlistGenerator(formatted_songs) {
-  //playlist.css(“display”, “flex”)
   var playlistName = { name: "Bandwagon" }
   $.ajax({
     method: 'POST',
@@ -134,6 +141,9 @@ function playlistGenerator(formatted_songs) {
       console.log("Playlist Created!")
       playlist_id = response.id
       addSongs(playlist_id, formatted_songs)
+      band_top_track_api_results = []
+      list_of_song_titles = []
+      band_id_api_results = []
       displayPlaylist()
     }
   })
@@ -186,17 +196,29 @@ function getUserId() {
       console.log("User ID retrieved")
     }
   })
-}
+  // Dynamically injects the playlist after it has been generated
+  function displayPlaylist() {
+    playlistDiv = document.getElementById("playlist")
+    playlistDiv.innerHTML = ''
+    playlistDiv.innerHTML = `<iframe id="playlist-frame" src="https://open.spotify.com/embed?uri=spotify:user:${currentUser}:playlist:${playlist_id}" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>`
+  }
 
-// Sends user to authorization page
-authorize.click(() => {
-  spotifyAuthorize()
-})
+  // Sends user to authorization page
+  authorize.click(() => {
+    spotifyAuthorize()
+  })
 
 
-// Extracts token and User ID after authorization, then goes through basically every other function on the page.
-playlist_generator.click(() => {
-  getToken()
-  getUserId()
-  let id_list = findBandIds(artistPass)
-})
+  // Extracts token and User ID after authorization, then goes through basically every other function on the page.
+  playlist_generator.click(() => {
+    getToken()
+    getUserId()
+    $('#playlist').html(` <div class="spinner">
+  <div class="rect1"></div>
+  <div class="rect2"></div>
+  <div class="rect3"></div>
+  <div class="rect4"></div>
+  <div class="rect5"></div>
+ </div>`)
+    let id_list = findBandIds(artistPass)
+  })
