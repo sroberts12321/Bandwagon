@@ -9,7 +9,6 @@ var successful_requests = 0
 var band_id_api_results = []
 var band_top_track_api_results = []
 
-
 // Extracts token from URL after user authorizes client to access Spotify profile
 function getHashParams() {
   var hashParams = {};
@@ -30,7 +29,7 @@ function spotifyAuthorize() {
 function getToken() {
   var params = getHashParams();
   access_token = params.access_token
-  console.log("Token created")
+  //console.log("Token created")
 }
 
 // Retrieves User Id and sets it to global variable, resets variable each time called
@@ -45,7 +44,7 @@ function getUserId() {
     },
     success: (response) => {
       currentUser = response.id
-      console.log("User ID retrieved")
+      //console.log("User ID retrieved")
     },
     error: () => {
       alert("Please log into spotify first")
@@ -73,11 +72,11 @@ function findBandIds(searchTerms) {
 
 
       if (length_of_requests == successful_requests) {
-        console.log("Finished getting Band IDs")
+        //console.log("Finished getting Band IDs")
         successful_requests = 0
         findTopSongs(band_id_api_results)
       } else {
-        console.log("Still fetching info")
+        //console.log("Still fetching info")
       }
     })
   })
@@ -108,8 +107,8 @@ function findTopSongs(list_of_band_ids) {
       }
 
       if (length_of_requests == successful_requests) {
-        console.log("Finished getting top tracks")
-        console.log(list_of_song_titles)
+        //console.log("Finished getting top tracks")
+        //console.log(list_of_song_titles)
         successful_requests = 0
         var songFormat = formattedSongs()
         playlistGenerator(songFormat)
@@ -132,7 +131,7 @@ function playlistGenerator(formatted_songs) {
       'Authorization': 'Bearer ' + access_token
     },
     success: (response) => {
-      console.log("Playlist Created!")
+      //console.log("Playlist Created!")
       playlist_id = response.id
       addSongs(playlist_id, formatted_songs)
       band_top_track_api_results = []

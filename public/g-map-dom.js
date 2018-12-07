@@ -10,7 +10,7 @@ function startTimeStamp() {
   let timeZoneOffset = (new Date()).getTimezoneOffset() * 60000
   let startTime = (new Date(Date.now() - timeZoneOffset)).toISOString();
   startTime = startTime.substring(0, startTime.indexOf('T'))
-  console.log(startTime)
+  //console.log(startTime)
   return startTime
 }
 
@@ -21,7 +21,7 @@ function endTimeStamp() {
   let endTime = new Date(Date.now() + daysOffset - timeZoneOffset)
   endTime = endTime.toISOString()
   endTime = endTime.substring(0, endTime.indexOf('T'))
-  console.log(endTime)
+  //console.log(endTime)
   return endTime
 }
 
@@ -73,7 +73,7 @@ function getCity() {
   if (locationData[cityName] == undefined) {
     cityName = 'USA'
   }
-  console.log(cityName)
+  //console.log(cityName)
   return cityName
 }
 

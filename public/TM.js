@@ -14,12 +14,12 @@ var city = '&dmaId=' + locationPick
 function generateList() {
     var genreChoice = document.getElementById("genreSelect").value;
     playlist.css("display", "None")
-    console.log("hiding playlist")
+    //console.log("hiding playlist")
     genre = genreChoice;
     locationPick = getCity()
     genresearch = '&classificationId=' + genre
     dateRangeStart = startTimeStamp()
-    console.log(dateRangeStart)
+    //console.log(dateRangeStart)
     dateRangeEnd = endTimeStamp()
     dateRange = '&startDateTime=' + dateRangeStart + 'T00:00:00Z&endDateTime=' + dateRangeEnd + 'T23:59:59Z'
     buildLocation()
@@ -32,7 +32,7 @@ generate.addEventListener('click', function () {
     locationPick = getCity()
     genresearch = '&classificationId=' + genre
     dateRangeStart = startTimeStamp()
-    console.log(dateRangeStart)
+    //console.log(dateRangeStart)
     dateRangeEnd = endTimeStamp()
     dateRange = '&startDateTime=' + dateRangeStart + 'T00:00:00Z&endDateTime=' + dateRangeEnd + 'T23:59:59Z'
     buildLocation()
@@ -47,7 +47,7 @@ function buildLocation() {
 
 function fetchAll() {
     let searchstring = concertURL + genresearch + city + dateRange + tmAPI_KEY
-    console.log(searchstring)
+    //console.log(searchstring)
     fetch(searchstring)
         .then(function (response) { return response.json() })
         .then(function (json) {
